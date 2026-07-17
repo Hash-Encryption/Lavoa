@@ -4,6 +4,7 @@ export type MenuItem = {
   desc?: string;
   descEn?: string;
   price: number;
+  imageUrl?: string;
 };
 
 export type MenuCategory = {
