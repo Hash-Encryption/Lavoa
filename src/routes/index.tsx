@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Instagram, Phone, Sparkles, Languages } from "lucide-react";
+import { Instagram, Phone, Sparkles, Languages, Coffee } from "lucide-react";
 import heroImg from "@/assets/hero-lounge.jpg";
 import { MENU } from "@/lib/menu-data";
 
