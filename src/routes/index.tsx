@@ -242,32 +242,58 @@ function Index() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: Math.min(i * 0.05, 0.6) }}
                     whileHover={{ y: -6 }}
-                    className="glass-card group relative overflow-hidden rounded-2xl p-6 transition-all duration-500 hover:border-gold/60 hover:shadow-glow-gold"
+                    className="glass-card group relative overflow-hidden rounded-2xl p-4 transition-all duration-500 hover:border-gold/60 hover:shadow-glow-gold"
                   >
                     <div className="absolute inset-0 opacity-0 bg-gradient-to-br from-gold/10 via-transparent to-transparent transition-opacity duration-500 group-hover:opacity-100" />
-                    <div className="relative">
-                      <div className="flex items-start justify-between gap-4">
-                        <h3 className="text-lg font-bold text-foreground leading-tight flex-1">
-                          {name}
-                        </h3>
-                        <div
-                          className="shrink-0 rounded-full border border-gold/50 bg-onyx/80 px-3 py-1"
-                          style={{ backgroundColor: "color-mix(in oklab, var(--onyx) 85%, transparent)" }}
-                        >
-                          <span
-                            className="font-display font-bold text-sm tabular-nums"
-                            style={{ color: "var(--champagne)" }}
+                    <div className="relative flex items-stretch gap-4">
+                      {/* Thumbnail */}
+                      <div className="relative shrink-0 h-24 w-24 sm:h-28 sm:w-28 overflow-hidden rounded-xl ring-1 ring-gold/25">
+                        {item.imageUrl ? (
+                          <img
+                            src={item.imageUrl}
+                            alt={name}
+                            loading="lazy"
+                            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                          />
+                        ) : (
+                          <div
+                            className="h-full w-full grid place-items-center backdrop-blur-xl"
+                            style={{
+                              background:
+                                "linear-gradient(135deg, color-mix(in oklab, var(--charcoal) 70%, transparent), color-mix(in oklab, var(--onyx) 90%, transparent))",
+                            }}
                           >
-                            ${item.price.toFixed(2)}
-                          </span>
-                        </div>
+                            <Coffee className="h-7 w-7 text-gold/50" />
+                          </div>
+                        )}
+                        <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/5 rounded-xl" />
                       </div>
-                      {desc && (
-                        <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
-                          {desc}
-                        </p>
-                      )}
-                      <div className="mt-4 h-px w-full bg-gradient-to-l from-transparent via-gold/30 to-transparent" />
+
+                      {/* Content */}
+                      <div className="flex-1 min-w-0 flex flex-col">
+                        <div className="flex items-start justify-between gap-3">
+                          <h3 className="text-base sm:text-lg font-bold text-foreground leading-tight flex-1">
+                            {name}
+                          </h3>
+                          <div
+                            className="shrink-0 rounded-full border border-gold/50 px-2.5 py-0.5"
+                            style={{ backgroundColor: "color-mix(in oklab, var(--onyx) 85%, transparent)" }}
+                          >
+                            <span
+                              className="font-display font-bold text-sm tabular-nums"
+                              style={{ color: "var(--champagne)" }}
+                            >
+                              ${item.price.toFixed(2)}
+                            </span>
+                          </div>
+                        </div>
+                        {desc && (
+                          <p className="mt-2 text-xs sm:text-sm text-muted-foreground leading-relaxed line-clamp-3">
+                            {desc}
+                          </p>
+                        )}
+                        <div className="mt-auto pt-3 h-px w-full bg-gradient-to-l from-transparent via-gold/30 to-transparent" />
+                      </div>
                     </div>
                   </motion.article>
                 );
