@@ -1,13 +1,42 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Instagram, Phone, Sparkles } from "lucide-react";
+import { Instagram, Phone, Sparkles, Languages } from "lucide-react";
 import heroImg from "@/assets/hero-lounge.jpg";
 import { MENU } from "@/lib/menu-data";
 
 export const Route = createFileRoute("/")({
   component: Index,
 });
+
+type Lang = "ar" | "en";
+
+const T = {
+  ar: {
+    tagline: "Est. Midnight",
+    brand: "لافوا",
+    subBrand: "LAVOA",
+    hero: "تجربة ليلية استثنائية حيث تلتقي الأناقة بذائقة المذاق — قهوة راقية، معسلات فاخرة، وأجواء لا تُنسى",
+    cta: "استكشف القائمة",
+    menuKicker: "The Menu",
+    menuTitle: "قائمتنا الفاخرة",
+    footerTag: "تجربة ليلية فاخرة",
+    rights: "جميع الحقوق محفوظة",
+    switchTo: "EN",
+  },
+  en: {
+    tagline: "Est. Midnight",
+    brand: "LAVOA",
+    subBrand: "لافوا",
+    hero: "An extraordinary nightly experience where elegance meets exquisite taste — refined coffee, premium shisha, and an unforgettable ambience",
+    cta: "Explore the Menu",
+    menuKicker: "The Menu",
+    menuTitle: "Our Luxury Menu",
+    footerTag: "A Luxury Night Experience",
+    rights: "All rights reserved",
+    switchTo: "عربي",
+  },
+} as const;
 
 function TikTokIcon({ className }: { className?: string }) {
   return (
@@ -18,16 +47,16 @@ function TikTokIcon({ className }: { className?: string }) {
 }
 
 function Index() {
+  const [lang, setLang] = useState<Lang>("ar");
   const [active, setActive] = useState(MENU[0].id);
   const menuRef = useRef<HTMLDivElement>(null);
   const tabsRef = useRef<HTMLDivElement>(null);
   const activeCat = MENU.find((c) => c.id === active) ?? MENU[0];
+  const t = T[lang];
+  const isAr = lang === "ar";
 
-  // Center-scroll the active tab into view on mobile
   useEffect(() => {
-    const el = tabsRef.current?.querySelector<HTMLButtonElement>(
-      `[data-tab="${active}"]`
-    );
+    const el = tabsRef.current?.querySelector<HTMLButtonElement>(`[data-tab="${active}"]`);
     el?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
   }, [active]);
 
@@ -35,8 +64,27 @@ function Index() {
     menuRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
+  const toggleLang = () => setLang((l) => (l === "ar" ? "en" : "ar"));
+
   return (
-    <div dir="rtl" className="min-h-screen bg-background text-foreground font-arabic overflow-x-hidden">
+    <div
+      dir={isAr ? "rtl" : "ltr"}
+      lang={lang}
+      className={`min-h-screen bg-background text-foreground overflow-x-hidden ${
+        isAr ? "font-arabic" : ""
+      }`}
+    >
+      {/* Language toggle */}
+      <button
+        onClick={toggleLang}
+        aria-label="Switch language"
+        className="fixed top-5 z-50 inline-flex items-center gap-2 rounded-full border border-gold/40 bg-background/70 px-4 py-2 text-sm font-bold text-gold backdrop-blur-xl shadow-gold transition-all hover:border-gold hover:shadow-glow-gold"
+        style={isAr ? { left: "1.25rem" } : { right: "1.25rem" }}
+      >
+        <Languages className="h-4 w-4" />
+        <span>{t.switchTo}</span>
+      </button>
+
       {/* HERO */}
       <section className="relative h-screen w-full overflow-hidden">
         <div
@@ -52,11 +100,11 @@ function Index() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.2 }}
-            className="flex items-center gap-2 text-gold/80"
+            className="flex items-center gap-3 text-gold/80"
           >
             <span className="h-px w-10 bg-gold/60" />
             <Sparkles className="h-4 w-4" />
-            <span className="font-display italic tracking-widest text-sm">Est. Midnight</span>
+            <span className="font-display italic tracking-[0.35em] text-xs">{t.tagline}</span>
             <Sparkles className="h-4 w-4" />
             <span className="h-px w-10 bg-gold/60" />
           </motion.div>
@@ -65,18 +113,28 @@ function Index() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.4 }}
-            className="mt-6 text-5xl sm:text-7xl md:text-8xl font-black leading-tight"
+            className="mt-6 text-6xl sm:text-8xl md:text-9xl font-black leading-none tracking-tight text-champagne drop-shadow-[0_4px_30px_rgba(212,175,55,0.35)]"
+            style={{ color: "var(--champagne)" }}
           >
-            <span className="bg-gold-gradient bg-clip-text text-transparent">ليالي الفخامة</span>
+            {t.brand}
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.7 }}
+            transition={{ duration: 1, delay: 0.55 }}
+            className="mt-3 font-display italic text-gold tracking-[0.4em] text-sm"
+          >
+            {t.subBrand}
+          </motion.p>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.75 }}
             className="mt-6 max-w-xl text-base sm:text-lg text-muted-foreground leading-relaxed"
           >
-            تجربة ليلية استثنائية حيث تلتقي الأناقة بذائقة المذاق — قهوة راقية، معسلات فاخرة، وأجواء لا تُنسى
+            {t.hero}
           </motion.p>
 
           <motion.button
@@ -88,7 +146,7 @@ function Index() {
             onClick={scrollToMenu}
             className="group relative mt-10 overflow-hidden rounded-full bg-gold-gradient px-10 py-4 text-primary-foreground font-bold text-base shadow-gold transition-all hover:shadow-glow-gold"
           >
-            <span className="relative z-10">استكشف القائمة</span>
+            <span className="relative z-10">{t.cta}</span>
             <span className="absolute inset-0 -translate-x-full bg-white/20 transition-transform duration-700 group-hover:translate-x-full" />
           </motion.button>
 
@@ -118,9 +176,12 @@ function Index() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <p className="font-display italic text-gold tracking-widest text-sm">The Menu</p>
-            <h2 className="mt-2 text-4xl sm:text-5xl font-black">
-              <span className="bg-gold-gradient bg-clip-text text-transparent">قائمتنا الفاخرة</span>
+            <p className="font-display italic text-gold tracking-[0.35em] text-xs">{t.menuKicker}</p>
+            <h2
+              className="mt-3 text-4xl sm:text-5xl font-black tracking-tight"
+              style={{ color: "var(--champagne)" }}
+            >
+              {t.menuTitle}
             </h2>
             <div className="mx-auto mt-4 h-px w-24 bg-gradient-to-l from-transparent via-gold to-transparent" />
           </motion.div>
@@ -130,7 +191,7 @@ function Index() {
         <div className="sticky top-0 z-30 mt-10 border-y border-gold/10 bg-background/70 backdrop-blur-xl">
           <div
             ref={tabsRef}
-            className="mx-auto flex max-w-6xl gap-2 overflow-x-auto px-4 py-4 scrollbar-none [&::-webkit-scrollbar]:hidden"
+            className="mx-auto flex max-w-6xl gap-2 overflow-x-auto px-4 py-4 [&::-webkit-scrollbar]:hidden"
             style={{ scrollbarWidth: "none" }}
           >
             {MENU.map((cat) => {
@@ -141,9 +202,7 @@ function Index() {
                   data-tab={cat.id}
                   onClick={() => setActive(cat.id)}
                   className={`relative shrink-0 rounded-full px-5 py-2.5 text-sm font-bold transition-all ${
-                    isActive
-                      ? "text-primary-foreground"
-                      : "text-muted-foreground hover:text-gold"
+                    isActive ? "text-primary-foreground" : "text-muted-foreground hover:text-gold"
                   }`}
                 >
                   {isActive && (
@@ -153,7 +212,9 @@ function Index() {
                       className="absolute inset-0 rounded-full bg-gold-gradient shadow-gold"
                     />
                   )}
-                  <span className="relative z-10 whitespace-nowrap">{cat.label}</span>
+                  <span className="relative z-10 whitespace-nowrap">
+                    {isAr ? cat.label : cat.labelEn}
+                  </span>
                 </button>
               );
             })}
@@ -164,43 +225,53 @@ function Index() {
         <div className="mx-auto max-w-6xl px-4 pt-12">
           <AnimatePresence mode="wait">
             <motion.div
-              key={activeCat.id}
+              key={activeCat.id + lang}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.4 }}
               className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
             >
-              {activeCat.items.map((item, i) => (
-                <motion.article
-                  key={item.name}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: Math.min(i * 0.05, 0.6) }}
-                  whileHover={{ y: -6 }}
-                  className="glass-card group relative overflow-hidden rounded-2xl p-6 transition-all duration-500 hover:border-gold/60 hover:shadow-glow-gold"
-                >
-                  <div className="absolute inset-0 opacity-0 bg-gradient-to-br from-gold/10 via-transparent to-transparent transition-opacity duration-500 group-hover:opacity-100" />
-                  <div className="relative">
-                    <div className="flex items-start justify-between gap-4">
-                      <h3 className="text-lg font-bold text-foreground leading-tight flex-1">
-                        {item.name}
-                      </h3>
-                      <div className="shrink-0 rounded-full border border-gold/40 bg-background/50 px-3 py-1">
-                        <span className="font-display font-bold text-gold text-sm tabular-nums">
-                          ${item.price.toFixed(2)}
-                        </span>
+              {activeCat.items.map((item, i) => {
+                const name = isAr ? item.name : item.nameEn;
+                const desc = isAr ? item.desc : item.descEn;
+                return (
+                  <motion.article
+                    key={name}
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: Math.min(i * 0.05, 0.6) }}
+                    whileHover={{ y: -6 }}
+                    className="glass-card group relative overflow-hidden rounded-2xl p-6 transition-all duration-500 hover:border-gold/60 hover:shadow-glow-gold"
+                  >
+                    <div className="absolute inset-0 opacity-0 bg-gradient-to-br from-gold/10 via-transparent to-transparent transition-opacity duration-500 group-hover:opacity-100" />
+                    <div className="relative">
+                      <div className="flex items-start justify-between gap-4">
+                        <h3 className="text-lg font-bold text-foreground leading-tight flex-1">
+                          {name}
+                        </h3>
+                        <div
+                          className="shrink-0 rounded-full border border-gold/50 bg-onyx/80 px-3 py-1"
+                          style={{ backgroundColor: "color-mix(in oklab, var(--onyx) 85%, transparent)" }}
+                        >
+                          <span
+                            className="font-display font-bold text-sm tabular-nums"
+                            style={{ color: "var(--champagne)" }}
+                          >
+                            ${item.price.toFixed(2)}
+                          </span>
+                        </div>
                       </div>
+                      {desc && (
+                        <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
+                          {desc}
+                        </p>
+                      )}
+                      <div className="mt-4 h-px w-full bg-gradient-to-l from-transparent via-gold/30 to-transparent" />
                     </div>
-                    {item.desc && (
-                      <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
-                        {item.desc}
-                      </p>
-                    )}
-                    <div className="mt-4 h-px w-full bg-gradient-to-l from-transparent via-gold/30 to-transparent" />
-                  </div>
-                </motion.article>
-              ))}
+                  </motion.article>
+                );
+              })}
             </motion.div>
           </AnimatePresence>
         </div>
@@ -211,33 +282,26 @@ function Index() {
         <div className="mx-auto max-w-6xl px-6 py-14">
           <div className="flex flex-col items-center gap-8 text-center">
             <div>
-              <p className="font-display italic text-gold tracking-widest text-xs">Midnight Luxury</p>
-              <h3 className="mt-2 text-3xl font-black">
-                <span className="bg-gold-gradient bg-clip-text text-transparent">ليالي الفخامة</span>
+              <p className="font-display italic text-gold tracking-[0.35em] text-xs">
+                Midnight Luxury
+              </p>
+              <h3
+                className="mt-2 text-4xl font-black tracking-tight"
+                style={{ color: "var(--champagne)" }}
+              >
+                {t.brand}
               </h3>
-              <p className="mt-3 text-sm text-muted-foreground">تجربة ليلية فاخرة</p>
+              <p className="mt-3 text-sm text-muted-foreground">{t.footerTag}</p>
             </div>
 
             <div className="flex items-center gap-4">
-              <a
-                href="#"
-                aria-label="Instagram"
-                className="group grid h-11 w-11 place-items-center rounded-full border border-gold/30 text-gold transition-all hover:border-gold hover:shadow-glow-gold hover:scale-110"
-              >
+              <a href="#" aria-label="Instagram" className="grid h-11 w-11 place-items-center rounded-full border border-gold/30 text-gold transition-all hover:border-gold hover:shadow-glow-gold hover:scale-110">
                 <Instagram className="h-5 w-5" />
               </a>
-              <a
-                href="#"
-                aria-label="TikTok"
-                className="group grid h-11 w-11 place-items-center rounded-full border border-gold/30 text-gold transition-all hover:border-gold hover:shadow-glow-gold hover:scale-110"
-              >
+              <a href="#" aria-label="TikTok" className="grid h-11 w-11 place-items-center rounded-full border border-gold/30 text-gold transition-all hover:border-gold hover:shadow-glow-gold hover:scale-110">
                 <TikTokIcon className="h-5 w-5" />
               </a>
-              <a
-                href="tel:+000000000"
-                aria-label="Phone"
-                className="group grid h-11 w-11 place-items-center rounded-full border border-gold/30 text-gold transition-all hover:border-gold hover:shadow-glow-gold hover:scale-110"
-              >
+              <a href="tel:+000000000" aria-label="Phone" className="grid h-11 w-11 place-items-center rounded-full border border-gold/30 text-gold transition-all hover:border-gold hover:shadow-glow-gold hover:scale-110">
                 <Phone className="h-5 w-5" />
               </a>
             </div>
@@ -248,7 +312,7 @@ function Index() {
 
             <div className="mx-auto h-px w-24 bg-gradient-to-l from-transparent via-gold/40 to-transparent" />
             <p className="text-xs text-muted-foreground">
-              © {new Date().getFullYear()} ليالي الفخامة. جميع الحقوق محفوظة.
+              © {new Date().getFullYear()} {t.brand}. {t.rights}.
             </p>
           </div>
         </div>
