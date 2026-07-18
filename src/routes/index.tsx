@@ -283,7 +283,7 @@ function Index() {
                               className="font-display font-bold text-sm tabular-nums"
                               style={{ color: "var(--champagne)" }}
                             >
-                              ${item.price.toFixed(2)}
+                              S.R {item.price.toFixed(2)}
                             </span>
                           </div>
                         </div>
