@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Instagram, Phone, Sparkles, Languages, Coffee } from "lucide-react";
+import { Instagram, Phone, Sparkles, Languages, Coffee, MapPin } from "lucide-react";
 import heroImg from "@/assets/hero-lounge.jpg";
 import { MENU } from "@/lib/menu-data";
 
@@ -329,14 +329,17 @@ function Index() {
             </div>
 
             <div className="flex items-center gap-4">
-              <a href="#" aria-label="Instagram" className="grid h-11 w-11 place-items-center rounded-full border border-gold/30 text-gold transition-all hover:border-gold hover:shadow-glow-gold hover:scale-110">
+              <a href="https://www.instagram.com/lavoacafe?igsh=Z3VkM3JzbjViaW83" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="grid h-11 w-11 place-items-center rounded-full border border-gold/30 text-gold transition-all hover:border-gold hover:shadow-glow-gold hover:scale-110">
                 <Instagram className="h-5 w-5" />
               </a>
-              <a href="#" aria-label="TikTok" className="grid h-11 w-11 place-items-center rounded-full border border-gold/30 text-gold transition-all hover:border-gold hover:shadow-glow-gold hover:scale-110">
+              <a href="https://www.tiktok.com/@lavoa.lounge?_r=1&_t=ZS-98FbVBGHe4a" target="_blank" rel="noopener noreferrer" aria-label="TikTok" className="grid h-11 w-11 place-items-center rounded-full border border-gold/30 text-gold transition-all hover:border-gold hover:shadow-glow-gold hover:scale-110">
                 <TikTokIcon className="h-5 w-5" />
               </a>
               <a href="https://snapchat.com/t/6ipYMBLJ" target="_blank" rel="noopener noreferrer" aria-label="Snapchat" className="grid h-11 w-11 place-items-center rounded-full border border-gold/30 text-gold transition-all hover:border-gold hover:shadow-glow-gold hover:scale-110">
                 <SnapchatIcon className="h-5 w-5" />
+              </a>
+              <a href="https://maps.app.goo.gl/K53Upe4tXqj4FEmB8" target="_blank" rel="noopener noreferrer" aria-label="Google Maps" className="grid h-11 w-11 place-items-center rounded-full border border-gold/30 text-gold transition-all hover:border-gold hover:shadow-glow-gold hover:scale-110">
+                <MapPin className="h-5 w-5" />
               </a>
               <a href="tel:+000000000" aria-label="Phone" className="grid h-11 w-11 place-items-center rounded-full border border-gold/30 text-gold transition-all hover:border-gold hover:shadow-glow-gold hover:scale-110">
                 <Phone className="h-5 w-5" />
