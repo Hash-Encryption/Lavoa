@@ -39,9 +39,9 @@ export const PeopleChoiceSlider: React.FC = () => {
         </span>
       </div>
 
-      {/* Horizontal Slider */}
-      <div className="w-full overflow-x-auto scrollbar-none -mx-4 px-4 py-2">
-        <div className="flex items-center gap-4 min-w-max">
+      {/* Horizontal Slider with peek effect for mobile */}
+      <div className="w-full overflow-x-auto scrollbar-none -mx-3.5 px-3.5 py-1.5 snap-x snap-mandatory">
+        <div className="flex items-center gap-3 sm:gap-4 min-w-max">
           {peoplesChoice.map((product) => {
             const favorited = isFavorite(product.id);
 
@@ -50,7 +50,7 @@ export const PeopleChoiceSlider: React.FC = () => {
                 key={product.id}
                 whileHover={{ y: -4, transition: { duration: 0.2 } }}
                 onClick={() => setCustomizingProduct(product)}
-                className="w-64 sm:w-72 bg-[#0E1015] rounded-3xl p-4 border border-[#1E2028] hover:border-[#D4AF37]/50 shadow-xl transition-all flex flex-col justify-between relative group cursor-pointer"
+                className="w-52 sm:w-68 snap-start bg-[#0E1015] rounded-2xl sm:rounded-3xl p-3 sm:p-4 border border-[#1E2028] hover:border-[#D4AF37]/50 shadow-xl transition-all flex flex-col justify-between relative group cursor-pointer"
               >
                 {/* Top Header */}
                 <div className="flex items-center justify-between mb-1 z-10">

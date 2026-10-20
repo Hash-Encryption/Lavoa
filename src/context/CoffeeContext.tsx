@@ -103,6 +103,8 @@ interface CoffeeContextType {
   setIsOrderPlacedSuccess: (open: boolean) => void;
   isTrackingModalOpen: boolean;
   setIsTrackingModalOpen: (open: boolean) => void;
+  isTableServiceOpen: boolean;
+  setIsTableServiceOpen: (open: boolean) => void;
 }
 
 const CoffeeContext = createContext<CoffeeContextType | undefined>(undefined);
@@ -302,6 +304,7 @@ export const CoffeeProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const [isCartDrawerOpen, setIsCartDrawerOpen] = useState<boolean>(false);
   const [isOrderPlacedSuccess, setIsOrderPlacedSuccess] = useState<boolean>(false);
   const [isTrackingModalOpen, setIsTrackingModalOpen] = useState<boolean>(false);
+  const [isTableServiceOpen, setIsTableServiceOpen] = useState<boolean>(false);
 
   // Favorites (Persistent)
   const [favorites, setFavorites] = useState<string[]>(['sh1', 'sh3', 'c2']);
@@ -684,6 +687,8 @@ export const CoffeeProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         setIsOrderPlacedSuccess,
         isTrackingModalOpen,
         setIsTrackingModalOpen,
+        isTableServiceOpen,
+        setIsTableServiceOpen,
       }}
     >
       {children}

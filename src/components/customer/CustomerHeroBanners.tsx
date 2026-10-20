@@ -83,7 +83,7 @@ export const CustomerHeroBanners: React.FC = () => {
   return (
     <div className="w-full space-y-4">
       {/* ---------------- 1. MOBILE STICKY HORIZONTAL CATEGORY PILLS ---------------- */}
-      <div className="lg:hidden sticky top-[57px] z-30 bg-[#070709]/95 backdrop-blur-xl py-2.5 -mx-4 px-4 border-b border-[#1E2028]">
+      <div className="lg:hidden sticky top-[53px] sm:top-[57px] z-30 bg-[#070709]/95 backdrop-blur-xl py-2 -mx-3.5 px-3.5 border-b border-[#D4AF37]/20 shadow-md">
         <div className="flex items-center gap-2 overflow-x-auto scrollbar-none snap-x snap-mandatory">
           {/* "All" Category Pill */}
           <motion.button

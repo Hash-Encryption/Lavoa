@@ -40,7 +40,7 @@ export const CinematicHeroSection: React.FC = () => {
   return (
     <section className="w-full space-y-6 pt-2 pb-4">
       {/* ---------------- 1. CINEMATIC HERO BRAND BANNER ---------------- */}
-      <div className="relative w-full rounded-3xl overflow-hidden bg-[#070709] border border-[#D4AF37]/35 shadow-[0_15px_50px_rgba(0,0,0,0.7)] p-6 sm:p-12 text-center select-none min-h-[320px] sm:min-h-[360px] flex flex-col justify-center items-center">
+      <div className="relative w-full rounded-3xl overflow-hidden bg-[#070709] border border-[#D4AF37]/35 shadow-[0_15px_50px_rgba(0,0,0,0.7)] p-5 sm:p-10 text-center select-none min-h-[290px] sm:min-h-[360px] flex flex-col justify-center items-center">
         {/* Background Real Luxury Hero Photography */}
         <div 
           className="absolute inset-0 bg-cover bg-center opacity-30 mix-blend-luminosity scale-105 transition-transform duration-1000"
@@ -52,10 +52,10 @@ export const CinematicHeroSection: React.FC = () => {
         <div className="absolute -bottom-16 right-10 w-64 h-64 bg-[#AA7C11]/15 rounded-full blur-[80px] pointer-events-none" />
 
         {/* Top Floating Badge */}
-        <div className="relative z-10 flex items-center justify-center gap-2 mb-3">
-          <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1A1C24]/90 backdrop-blur-md border border-[#D4AF37]/50 text-[#D4AF37] text-xs font-bold tracking-wider uppercase shadow-lg">
-            <span className="w-2 h-2 rounded-full bg-[#10B981] animate-ping" />
-            <Crown className="w-3.5 h-3.5 text-[#D4AF37]" />
+        <div className="relative z-10 flex items-center justify-center gap-2 mb-2 sm:mb-3">
+          <span className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-[#1A1C24]/90 backdrop-blur-md border border-[#D4AF37]/50 text-[#D4AF37] text-[10px] sm:text-xs font-bold tracking-wider uppercase shadow-lg">
+            <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[#10B981] animate-ping" />
+            <Crown className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#D4AF37]" />
             <span>
               {language === 'ar'
                 ? 'لاونج وشيشة فاخرة ومشروبات مختصة'
@@ -65,23 +65,23 @@ export const CinematicHeroSection: React.FC = () => {
         </div>
 
         {/* Prominent LAVOIA LOUNGE Typography with Animated Gold Shimmer */}
-        <div className="relative z-10 my-2 sm:my-3">
-          <h1 className="text-3xl sm:text-5xl md:text-6xl font-black uppercase tracking-widest text-gold-shimmer drop-shadow-[0_4px_20px_rgba(212,175,55,0.35)] font-sans">
+        <div className="relative z-10 my-1 sm:my-3">
+          <h1 className="text-2xl sm:text-4xl md:text-6xl font-black uppercase tracking-wider sm:tracking-widest text-gold-shimmer drop-shadow-[0_4px_20px_rgba(212,175,55,0.35)] font-sans">
             LAVOIA LOUNGE
           </h1>
-          <p className="text-xs sm:text-sm font-black text-[#D4AF37] font-arabic tracking-normal mt-1 drop-shadow-md">
+          <p className="text-[11px] sm:text-sm font-black text-[#D4AF37] font-arabic tracking-normal mt-1 drop-shadow-md">
             لافوا لاونج — فخامة الشيشة والقهوة المختصة بأجواء ملكية
           </p>
         </div>
 
         {/* Main Title & Editorial Description */}
-        <div className="relative z-10 max-w-2xl mx-auto space-y-2 mt-4">
-          <h2 className="text-base sm:text-xl md:text-2xl font-black text-white leading-relaxed drop-shadow-md">
+        <div className="relative z-10 max-w-2xl mx-auto space-y-1.5 sm:space-y-2 mt-2 sm:mt-4">
+          <h2 className="text-sm sm:text-xl md:text-2xl font-black text-white leading-snug sm:leading-relaxed drop-shadow-md">
             {language === 'ar'
               ? 'أجواء استثنائية، قهوة مختصة، وشيشة محضرة بإتقان ملكي'
               : 'Exceptional Ambiance, Artisan Coffee & Royal Shisha Craft'}
           </h2>
-          <p className="text-xs sm:text-sm text-[#C5C7D0] leading-relaxed max-w-xl mx-auto">
+          <p className="text-[11px] sm:text-sm text-[#C5C7D0] leading-relaxed max-w-xl mx-auto line-clamp-2 sm:line-clamp-none">
             {language === 'ar'
               ? 'تذوق أندر محاصيل البن المحمصة محلياً، واستمتع بأرقى نكهات المعسل الأصلي والخلطات الحصرية في بيئة راقية مصممة لأدق تفاصيل راحتك.'
               : 'Savor masterfully roasted specialty beans and premium curated shisha blends in an opulent lounge atmosphere.'}

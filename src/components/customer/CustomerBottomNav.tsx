@@ -26,8 +26,8 @@ export const CustomerBottomNav: React.FC = () => {
   ];
 
   return (
-    <div className="lg:hidden fixed bottom-0 start-0 end-0 z-40 px-4 pb-4 pointer-events-none">
-      <div className="w-full max-w-md mx-auto space-y-2 pointer-events-auto">
+    <div className="lg:hidden fixed bottom-0 start-0 end-0 z-40 px-3.5 pb-3 pb-[calc(0.75rem+env(safe-area-inset-bottom,0px))] pointer-events-none">
+      <div className="w-full max-w-lg mx-auto space-y-2 pointer-events-auto">
         {/* Sticky Cart Bar (Appears when cart has items) */}
         <AnimatePresence>
           {cartTotalCount > 0 && (

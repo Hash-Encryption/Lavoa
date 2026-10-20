@@ -14,6 +14,7 @@ import {
   Sparkles,
   Flame,
   Coffee,
+  Bell,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -34,6 +35,7 @@ export const CustomerHeader: React.FC = () => {
     setIsCartDrawerOpen,
     filteredProducts,
     setCustomizingProduct,
+    setIsTableServiceOpen,
   } = useCoffee();
 
   const [isSessionModalOpen, setIsSessionModalOpen] = useState(false);
@@ -74,24 +76,35 @@ export const CustomerHeader: React.FC = () => {
         <LAvoisLogo size="sm" showStatus={true} />
 
         {/* Action Controls */}
-        <div className="flex items-center gap-1.5 sm:gap-2">
+        <div className="flex items-center gap-1 sm:gap-2">
+          {/* Table Service Concierge Bell */}
+          <motion.button
+            whileTap={{ scale: 0.92 }}
+            onClick={() => setIsTableServiceOpen(true)}
+            className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#161822] border border-[#D4AF37]/50 text-[#D4AF37] flex items-center justify-center transition-all relative shadow-sm"
+            aria-label="Table Service"
+          >
+            <Bell className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+            <span className="absolute -top-0.5 -end-0.5 w-2 h-2 rounded-full bg-[#10B981] animate-ping" />
+          </motion.button>
+
           {/* Quick Search Toggle Button */}
           <button
             onClick={() => setIsSearchOpenMobile(!isSearchOpenMobile)}
-            className="w-9 h-9 rounded-full bg-[#12141A] border border-[#222530] text-[#9E9EA7] hover:text-[#D4AF37] flex items-center justify-center transition-colors"
+            className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#12141A] border border-[#222530] text-[#9E9EA7] hover:text-[#D4AF37] flex items-center justify-center transition-colors"
             aria-label="Search"
           >
-            <Search className="w-4 h-4" />
+            <Search className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
           </button>
 
           {/* Session / Table Capsule */}
           <motion.button
             whileTap={{ scale: 0.95 }}
             onClick={() => setIsSessionModalOpen(true)}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#14161F] border border-[#D4AF37]/35 text-[#D4AF37] text-xs font-bold shadow-xs active:bg-[#1E212D]"
+            className="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-full bg-[#14161F] border border-[#D4AF37]/35 text-[#D4AF37] text-xs font-bold shadow-xs active:bg-[#1E212D]"
           >
-            <MapPin className="w-3.5 h-3.5 text-[#D4AF37] shrink-0" />
-            <span className="truncate max-w-[110px] sm:max-w-none">
+            <MapPin className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#D4AF37] shrink-0" />
+            <span className="truncate max-w-[85px] sm:max-w-none">
               {orderType === 'dine-in' ? `طاولة ${tableNumber}` : t('takeAway')}
             </span>
             <ChevronDown className="w-3 h-3 opacity-70" />
@@ -101,9 +114,9 @@ export const CustomerHeader: React.FC = () => {
           <motion.button
             whileTap={{ scale: 0.94 }}
             onClick={toggleLanguage}
-            className="flex items-center gap-1 px-2.5 py-1.5 rounded-full bg-[#12141A] border border-[#222530] text-white text-xs font-bold shadow-xs hover:border-[#D4AF37]/40"
+            className="flex items-center gap-1 px-2 sm:px-2.5 py-1.5 rounded-full bg-[#12141A] border border-[#222530] text-white text-[11px] sm:text-xs font-bold shadow-xs hover:border-[#D4AF37]/40"
           >
-            <Languages className="w-3.5 h-3.5 text-[#D4AF37]" />
+            <Languages className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#D4AF37]" />
             <span>{language === 'ar' ? 'EN' : 'عربي'}</span>
           </motion.button>
 
@@ -111,10 +124,10 @@ export const CustomerHeader: React.FC = () => {
           <motion.button
             whileTap={{ scale: 0.92 }}
             onClick={() => setIsCartDrawerOpen(true)}
-            className="relative w-9 h-9 rounded-full bg-gradient-to-r from-[#AA7C11] via-[#D4AF37] to-[#F3E5AB] text-[#070709] flex items-center justify-center shadow-md shadow-[#D4AF37]/25 font-black shrink-0"
+            className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-gradient-to-r from-[#AA7C11] via-[#D4AF37] to-[#F3E5AB] text-[#070709] flex items-center justify-center shadow-md shadow-[#D4AF37]/25 font-black shrink-0"
             aria-label={t('cartTitle')}
           >
-            <ShoppingBag className="w-4 h-4" />
+            <ShoppingBag className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             {cartTotalCount > 0 && (
               <span className="absolute -top-1 -end-1 w-4 h-4 bg-[#EF4444] text-white text-[9px] font-black rounded-full flex items-center justify-center border-2 border-[#070709] animate-pulse">
                 {cartTotalCount}
@@ -278,8 +291,19 @@ export const CustomerHeader: React.FC = () => {
             </AnimatePresence>
           </div>
 
-          {/* Right Action Controls: Language & Gold Cart */}
+          {/* Right Action Controls: Table Service, Language & Gold Cart */}
           <div className="flex items-center gap-3">
+            {/* Table Service Concierge Button */}
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setIsTableServiceOpen(true)}
+              className="flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-[#181A24] border border-[#D4AF37]/50 text-xs font-bold text-[#D4AF37] hover:bg-[#D4AF37] hover:text-[#070709] shadow-sm transition-all"
+            >
+              <Bell className="w-4 h-4" />
+              <span>{language === 'ar' ? 'طلب النادل' : 'Call Waiter'}</span>
+            </motion.button>
+
             {/* Language Switcher */}
             <motion.button
               whileHover={{ scale: 1.05 }}

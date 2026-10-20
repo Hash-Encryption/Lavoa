@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useCoffee } from '../../src/context/CoffeeContext';
 import { CustomerHeader } from '../../src/components/customer/CustomerHeader';
 import { CinematicHeroSection } from '../../src/components/customer/CinematicHeroSection';
@@ -11,6 +11,7 @@ import { CustomerProductGrid } from '../../src/components/customer/CustomerProdu
 import { ProductCustomizationModal } from '../../src/components/customer/ProductCustomizationModal';
 import { CustomerCartDrawer } from '../../src/components/customer/CustomerCartDrawer';
 import { OrderConfirmationModal } from '../../src/components/customer/OrderConfirmationModal';
+import { TableServiceModal } from '../../src/components/customer/TableServiceModal';
 import { CustomerBottomNav } from '../../src/components/customer/CustomerBottomNav';
 import { CustomerOrdersView } from '../../src/components/customer/CustomerOrdersView';
 import { CustomerSavedView } from '../../src/components/customer/CustomerSavedView';
@@ -20,22 +21,48 @@ import { Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export default function CustomerAppPage() {
-  const { activeMobileTab, activeCategory, t, language } = useCoffee();
+  const {
+    activeMobileTab,
+    activeCategory,
+    t,
+    language,
+    setTableNumber,
+    setOrderType,
+    setLoungeArea,
+    isTableServiceOpen,
+    setIsTableServiceOpen,
+  } = useCoffee();
+
+  // Read QR Table Code parameters on mount (e.g. ?table=12&area=terrace)
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const urlTable = params.get('table');
+      const urlArea = params.get('area');
+      if (urlTable) {
+        setTableNumber(urlTable);
+        setOrderType('dine-in');
+      }
+      if (urlArea === 'terrace' || urlArea === 'vip' || urlArea === 'indoor') {
+        setLoungeArea(urlArea);
+      }
+    }
+  }, [setTableNumber, setOrderType, setLoungeArea]);
 
   return (
-    <div className="min-h-screen bg-[#070709] flex flex-col text-[#F3F4F6] selection:bg-[#D4AF37] selection:text-[#070709] relative">
+    <div className="min-h-screen bg-[#070709] flex flex-col text-[#F3F4F6] selection:bg-[#D4AF37] selection:text-[#070709] relative overflow-x-hidden">
       {/* Dynamic Ambient Background: Floating Gold Orbs & Subtle Hookah Mist */}
       <AmbientBackground />
 
       {/* 1. Universal Top Header (Adaptive Mobile & Desktop with Sticky Glassmorphism) */}
       <CustomerHeader />
 
-      {/* 2. Main Content Container */}
-      <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 pb-32 lg:pb-16 relative z-10">
+      {/* 2. Main Content Container - Ergonomically optimized for mobile touch zones */}
+      <main className="flex-1 w-full max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 py-3 sm:py-4 pb-36 sm:pb-32 lg:pb-16 relative z-10">
         {/* ============================================================== */}
         {/* MOBILE EXPERIENCE (< 1024px)                                   */}
         {/* ============================================================== */}
-        <div className="lg:hidden w-full max-w-md mx-auto space-y-5">
+        <div className="lg:hidden w-full max-w-xl mx-auto space-y-4 sm:space-y-5">
           {/* Mobile Tab Routing: Orders vs Saved vs Profile vs Home */}
           {activeMobileTab === 'orders' ? (
             <CustomerOrdersView />
@@ -52,19 +79,19 @@ export default function CustomerAppPage() {
               <LiveActiveOrderCard />
 
               {/* Category Showcase & Sticky Mobile Horizontal Pills */}
-              <div className="pt-1">
+              <div className="pt-0.5">
                 <CustomerHeroBanners />
               </div>
 
               {/* Lounge Bestsellers Horizontal Slider */}
-              <div className="pt-2">
+              <div className="pt-1">
                 <PeopleChoiceSlider />
               </div>
 
               {/* Full Menu Catalog */}
-              <div className="pt-3 space-y-3">
-                <div className="flex items-center justify-between pb-1">
-                  <h3 className="font-black text-base text-white flex items-center gap-2">
+              <div className="pt-2 space-y-2.5">
+                <div className="flex items-center justify-between pb-0.5">
+                  <h3 className="font-black text-sm sm:text-base text-white flex items-center gap-2">
                     <span>{language === 'ar' ? 'قائمة المنيو الفاخرة' : 'Full Luxury Catalog'}</span>
                     <Sparkles className="w-4 h-4 text-[#D4AF37]" />
                   </h3>
@@ -123,6 +150,10 @@ export default function CustomerAppPage() {
       <ProductCustomizationModal />
       <CustomerCartDrawer />
       <OrderConfirmationModal />
+      <TableServiceModal
+        isOpen={isTableServiceOpen}
+        onClose={() => setIsTableServiceOpen(false)}
+      />
     </div>
   );
 }
