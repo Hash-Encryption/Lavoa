@@ -1,0 +1,185 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-main: #070709;
+    --bg-card: rgba(17, 18, 22, 0.7);
+    --gold-primary: #D4AF37;
+    --gold-light: #F3E5AB;
+    --gold-dark: #AA7C11;
+    --emerald-status: #10B981;
+  }
+
+  * {
+    border-color: #1E2028;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: #070709;
+  }
+
+  body {
+    background-color: #070709;
+    color: #F3F4F6;
+    font-family: var(--font-arabic), var(--font-sans), 'IBM Plex Sans Arabic', 'Cairo', 'Readex Pro', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  [dir="rtl"] {
+    font-family: var(--font-arabic), 'IBM Plex Sans Arabic', 'Cairo', 'Readex Pro', system-ui, sans-serif;
+  }
+
+  [dir="rtl"] * {
+    letter-spacing: normal !important;
+  }
+
+  [dir="ltr"] {
+    font-family: var(--font-sans), 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+  }
+}
+
+/* ------------------------------------------------------------- */
+/* LUXURY ANIMATIONS & KEYFRAMES                                  */
+/* ------------------------------------------------------------- */
+
+/* Text Shimmer Effect for Gold Headings */
+@keyframes gold-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.text-gold-shimmer {
+  background: linear-gradient(
+    90deg,
+    #AA7C11 0%,
+    #D4AF37 25%,
+    #FFF4D0 50%,
+    #D4AF37 75%,
+    #AA7C11 100%
+  );
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: gold-shimmer 4s ease-in-out infinite;
+}
+
+/* Subtle Floating Animation for 3D Product Renders */
+@keyframes float-subtle {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-6px) rotate(0.8deg);
+  }
+}
+
+.animate-float {
+  animation: float-subtle 4s ease-in-out infinite;
+}
+
+/* Shisha / Coffee Steam & Smoke Rising Drift */
+@keyframes smoke-drift {
+  0% {
+    transform: translateY(0px) scale(0.95);
+    opacity: 0.15;
+  }
+  50% {
+    transform: translateY(-8px) scale(1.05);
+    opacity: 0.35;
+  }
+  100% {
+    transform: translateY(-16px) scale(1.15);
+    opacity: 0;
+  }
+}
+
+.animate-smoke {
+  animation: smoke-drift 3.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* Glowing Emerald Status Dot Pulse */
+@keyframes pulse-emerald {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
+  }
+}
+
+.animate-pulse-emerald {
+  animation: pulse-emerald 2s infinite;
+}
+
+/* Glowing Gold Pulse */
+@keyframes pulse-gold {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.35);
+  }
+  50% {
+    box-shadow: 0 0 24px rgba(212, 175, 55, 0.7);
+  }
+}
+
+.animate-pulse-gold {
+  animation: pulse-gold 2.5s infinite;
+}
+
+/* Background Ambient Gold Orb Drift */
+@keyframes orb-float-1 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(30px, 40px) scale(1.1);
+  }
+}
+
+@keyframes orb-float-2 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1.05);
+  }
+  50% {
+    transform: translate(-40px, -30px) scale(0.95);
+  }
+}
+
+.animate-orb-1 {
+  animation: orb-float-1 12s ease-in-out infinite alternate;
+}
+
+.animate-orb-2 {
+  animation: orb-float-2 15s ease-in-out infinite alternate;
+}
+
+/* Custom Glassmorphism Classes */
+.glass-panel-luxury {
+  background: rgba(17, 18, 22, 0.65);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(212, 175, 55, 0.15);
+}
+
+.glass-panel-luxury:hover {
+  border-color: rgba(212, 175, 55, 0.45);
+  box-shadow: 0 8px 30px -4px rgba(212, 175, 55, 0.12);
+}
+
+/* Hide scrollbars cleanly */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

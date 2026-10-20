@@ -1,0 +1,338 @@
+export type Language = 'ar' | 'en';
+export type Direction = 'rtl' | 'ltr';
+
+export const TRANSLATIONS = {
+  ar: {
+    // Brand
+    brandName: 'لافوا كافيه ولاونج',
+    brandTagline: 'أرقى تجربة قهوة مختصة وشيشة فاخرة',
+    heroTagline: 'أجواء استثنائية، قهوة مختصة، وشيشة محضرة بإتقان ملكي',
+    
+    // Header & Location
+    branchSelector: 'لافوا كافيه ولاونج - شارع التحلية',
+    tableChip: 'طاولة',
+    selectLocation: 'تحديد الجلسة وطريقة الاستلام',
+    dineIn: 'جلسة في اللاونج',
+    dineInDesc: 'استمتع بأجواء لافوا الفاخرة وخدمة الطاولة المتميزة',
+    takeAway: 'استلام سفري (مشروبات فقط)',
+    takeAwayDesc: 'استلم قهوتك وحلوياتك جاهزة بدون انتظار',
+    loungeAreaTitle: 'اختر منطقة الجلوس المفضلة',
+    areaIndoor: 'الصالة الداخلية الملكية',
+    areaTerrace: 'التراس والجلسات المفتوحة',
+    areaVip: 'أجنحة VIP الفاخرة',
+    tableNumberInput: 'رقم الطاولة / الجلسة',
+    tablePlaceholder: 'مثال: T4 أو طاولة 12',
+    customerNameLabel: 'اسمك الكريم',
+    customerNamePlaceholder: 'مثال: محمد السعيد',
+    customerPhoneLabel: 'رقم الجوال (للتأكيد)',
+    customerPhonePlaceholder: '05xxxxxxxx',
+    pickupTimeInput: 'وقت الاستلام التقريبي',
+    pickupTime10m: 'خلال 10-15 دقيقة',
+    pickupTime20m: 'خلال 20-30 دقيقة',
+    searchPlaceholder: 'ابحث في الشيشة، القهوة المختصة، الحلا...',
+    notifications: 'التنبيهات',
+
+    // Language Toggle
+    langSwitch: 'English',
+    currentLang: 'العربية',
+
+    // Categories & Hero Banners
+    categoriesTitle: 'أقسام لاونج لافوا',
+    all: 'الكل',
+    shisha: 'شيشة فاخرة',
+    coffee: 'قهوة مختصة',
+    tea: 'مشروبات وشاي',
+    snack: 'حلويات وسناك',
+    itemsAvailable: 'عنصر متوفر',
+    itemsTotal: 'عناصر',
+
+    // Subcategories
+    signature: 'مختارات لافوا الحصرية',
+    classic: 'كلاسيك فاخر',
+    iceFlavors: 'خلطات مثلجة وآيس',
+    naturalHead: 'رؤوس فواكه طبيعية',
+    manual: 'تقطير يدوي V60',
+    creamilk: 'بالحليب والكريمة',
+    herbal: 'شاي وأعشاب راقية',
+    special: 'حلويات التوقيع',
+    snacks: 'مخبوزات وسناك',
+
+    // People's Choice
+    peoplesChoice: 'الأكثر طلباً وتفضيلاً في اللاونج',
+    seeAll: 'عرض الكل',
+
+    // Promo Banner
+    promoTitle: 'عرض لاونج لافوا - كاش باك 10% ونقاط VIP',
+    promoSubtitle: 'اجمع نقاط ولاء مع كل طلب واستبدلها بشيشة ملكية أو قهوة مختصة مجاناً!',
+    promoCta: 'عرض العضوية',
+
+    // Live Active Order Floating Widget
+    activeOrderTitle: 'طلبك قيد التحضير المتقن في اللاونج',
+    orderNumber: 'رقم الطلب',
+    estimatedTime: 'الوقت المتوقع',
+    minsLeft: 'دقيقة متبقية',
+    orderTrackCta: 'متابعة الطلب',
+
+    // Product Card
+    customizeBtn: 'تخصيص',
+    quickAdd: 'إضافة سريعة',
+    addedToCartToast: 'تمت الإضافة إلى طلباتك بنجاح!',
+    viewCart: 'عرض الطلب',
+
+    // Shisha Customization
+    shishaHeadTitle: 'نوع رأس الشيشة',
+    headClay: 'رأس فخار كلاسيكي',
+    headApple: 'رأس تفاح طبيعي فريش (+15 ر.س)',
+    headPineapple: 'رأس أناناس طبيعي فريش (+25 ر.س)',
+    shishaHoseTitle: 'نوع اللي الصحي',
+    hoseDisposable: 'لي صحي معقم مغلف - استخدام مرة واحدة (مشمول)',
+    hoseSilicone: 'لي سيليكون طبي فاخر (+5 ر.س)',
+    iceBazookaTitle: 'إضافة آيس بازوكا (برودة ثلجية فائقة)',
+    iceBazookaYes: 'نعم، أضف آيس بازوكا مثلجة (+10 ر.س)',
+    iceBazookaNo: 'بدون آيس بازوكا (عادي)',
+    smokeDensityTitle: 'كثافة الدخان المرغوبة',
+    smokeLight: 'خفيف وناعم',
+    smokeMedium: 'معتدل ومتوازن',
+    smokeDense: 'كثيف وقوي',
+    shishaNotesTitle: 'ملاحظات خاصة لمعلم الشيشة',
+    shishaNotesPlaceholder: 'مثال: جمر خفيف، سرعة في الفحم، سحب ثقيل...',
+
+    // Drink Customization Modal
+    customizationTitle: 'تخصيص طلبك',
+    sizeTitle: 'حجم المشروب',
+    sizeSmall: 'صغير (Small)',
+    sizeMedium: 'وسط (Medium +2 ر.س)',
+    sizeLarge: 'كبير (Large +4 ر.س)',
+    milkTitle: 'نوع الحليب',
+    milkWhole: 'حليب عضوي كامل الدسم',
+    milkSkim: 'حليب خالي الدسم',
+    milkAlmond: 'حليب لوز محمص (+2 ر.س)',
+    milkOat: 'حليب شوفان كريمي (+2 ر.س)',
+    sweetnessTitle: 'درجة الحلاوة / السكر',
+    sweetNone: 'بدون سكر (0%)',
+    sweetLess: 'خفيف (50%)',
+    sweetNormal: 'عادي (100%)',
+    sweetExtra: 'زيادة (120%)',
+    tempTitle: 'درجة البرودة والثلج',
+    tempNormal: 'ثلج معتدل',
+    tempExtraIce: 'ثلج إضافي',
+    tempNoIce: 'بدون ثلج',
+    notesTitle: 'ملاحظات إضافية للباريستا / المطبخ',
+    notesPlaceholder: 'مثال: رغوة إضافية، تسخين بدرجة معينة، تقديم سريع...',
+    addToCartCta: 'إضافة إلى الفاتورة',
+
+    // Cart Drawer & Checkout
+    cartTitle: 'قائمة طلبات الجلسة',
+    emptyCartTitle: 'لم تختر أي طلبات بعد',
+    emptyCartMsg: 'تصفح قائمة الشيشة الفاخرة، القهوة المختصة، والحلويات وأضف ما يناسب مزاجك.',
+    exploreMenu: 'استكشف المنيو الآن',
+    orderTypeTitle: 'طريقة الاستلام والخدمة',
+    promoCodeTitle: 'كوبون الخصم أو كود VIP',
+    promoCodePlaceholder: 'أدخل الكود (جرّب LAVOIS10)',
+    applyPromo: 'تطبيق',
+    promoApplied: 'تم تطبيق خصم لافوا 10% بنجاح',
+    subtotal: 'المجموع الفرعي',
+    tax: 'ضريبة القيمة المضافة (15%)',
+    discount: 'الخصم',
+    total: 'المجموع الإجمالي',
+    paymentMethodTitle: 'طريقة الدفع في اللاونج',
+    payWaiter: 'الدفع عند الجلسة (كاش أو مدى)',
+    payApple: 'Apple Pay ()',
+    payMada: 'بطاقة مدى / ائتمانية',
+    confirmOrderCta: 'تأكيد وإرسال الطلب للاونج',
+
+    // Order Success Modal & Live Tracker
+    orderConfirmedTitle: 'تم تأكيد طلبك بنجاح!',
+    orderConfirmedSubtitle: 'طاقم لافوا بدأ الآن بتجهيز طلبك بعناية فائقة وسيتم تقديمه لطاولتك فوراً.',
+    statusReceived: 'تم استلام الطلب',
+    statusPreparing: 'جاري التحضير والتجهيز',
+    statusReady: 'جاهز ويتم تقديمه لجلستك',
+    saveReceipt: 'حفظ الفاتورة الإلكترونية',
+    startNewOrder: 'طلب عناصر إضافية',
+    close: 'إغلاق',
+
+    // Mobile Bottom Navigation
+    navHome: 'الرئيسية',
+    navOrders: 'طلباتي',
+    navSaved: 'المفضلة',
+    navProfile: 'حسابي وVIP',
+    stickyCartItems: 'عناصر',
+    stickyCartCheckout: 'إتمام الطلب',
+
+    // Saved & Profile Tabs
+    savedTitle: 'مختاراتك المفضلة',
+    savedEmpty: 'لم تحفظ أي شيشة أو مشروبات في المفضلة بعد.',
+    profileTitle: 'عضوية لاونج لافوا الملكية',
+    loyaltyPoints: 'نقاط الولاء المكتسبة',
+    pointsCount: '850 نقطة',
+    rewardsBadge: 'عضوية لافوا الذهبية VIP',
+    freeCoffeeReward: '150 نقطة متبقية للحصول على رأس شيشة ملكي أو مشروب مجاني!',
+  },
+
+  en: {
+    // Brand
+    brandName: "L'Avois Cafe & Lounge",
+    brandTagline: 'Specialty Coffee & Luxury Shisha Lounge',
+    heroTagline: 'Exceptional ambiance, specialty coffee, and royal crafted shisha',
+    
+    // Header & Location
+    branchSelector: "L'Avois Lounge - Tahlia St",
+    tableChip: 'Table',
+    selectLocation: 'Table Area & Dining Option',
+    dineIn: 'Lounge Dine-In',
+    dineInDesc: 'Experience luxury seating with personal table service',
+    takeAway: 'Takeaway (Beverages & Pastry)',
+    takeAwayDesc: 'Quick pickup without waiting in line',
+    loungeAreaTitle: 'Choose Preferred Lounge Area',
+    areaIndoor: 'Main Royal Lounge',
+    areaTerrace: 'Outdoor Terrace Lounge',
+    areaVip: 'Private VIP Suites',
+    tableNumberInput: 'Table / Suite #',
+    tablePlaceholder: 'e.g. T4 or Table 12',
+    customerNameLabel: 'Your Name',
+    customerNamePlaceholder: 'e.g. Alex Miller',
+    customerPhoneLabel: 'Mobile Phone #',
+    customerPhonePlaceholder: '05xxxxxxxx',
+    pickupTimeInput: 'Estimated Pickup Time',
+    pickupTime10m: 'In 10-15 mins',
+    pickupTime20m: 'In 20-30 mins',
+    searchPlaceholder: 'Search shisha, specialty coffee, desserts...',
+    notifications: 'Notifications',
+
+    // Language Toggle
+    langSwitch: 'العربية',
+    currentLang: 'English',
+
+    // Categories & Hero Banners
+    categoriesTitle: "L'Avois Menu Categories",
+    all: 'All',
+    shisha: 'Luxury Shisha',
+    coffee: 'Specialty Coffee',
+    tea: 'Beverages & Tea',
+    snack: 'Desserts & Bites',
+    itemsAvailable: 'items available',
+    itemsTotal: 'items',
+
+    // Subcategories
+    signature: "L'Avois Signatures",
+    classic: 'Royal Classics',
+    iceFlavors: 'Ice & Menthol Chill',
+    naturalHead: 'Fresh Fruit Heads',
+    manual: 'Manual Brew V60',
+    creamilk: 'Cream & Milk Brews',
+    herbal: 'Artisanal Herbal Tea',
+    special: 'Signature Sweets',
+    snacks: 'Bites & Savories',
+
+    // People's Choice
+    peoplesChoice: "Lounge Top Picks & Signatures",
+    seeAll: 'See All',
+
+    // Promo Banner
+    promoTitle: "L'Avois VIP Rewards - 10% Cashback",
+    promoSubtitle: 'Earn points with every session and redeem complimentary shisha or artisan brew!',
+    promoCta: 'View VIP Tier',
+
+    // Live Active Order Floating Widget
+    activeOrderTitle: 'Your order is being crafted with precision',
+    orderNumber: 'Order #',
+    estimatedTime: 'Estimated Time',
+    minsLeft: 'mins left',
+    orderTrackCta: 'Track Live',
+
+    // Product Card
+    customizeBtn: 'Customize',
+    quickAdd: 'Quick Add',
+    addedToCartToast: 'Added to your table order!',
+    viewCart: 'View Order',
+
+    // Shisha Customization
+    shishaHeadTitle: 'Hookah Head Option',
+    headClay: 'Classic Clay Head',
+    headApple: 'Fresh Natural Apple Head (+$4.0)',
+    headPineapple: 'Fresh Natural Pineapple Head (+$6.5)',
+    shishaHoseTitle: 'Sterile Hose Choice',
+    hoseDisposable: 'Single-Use Sterile Wrapped Hose (Included)',
+    hoseSilicone: 'Medical Silicone Hose (+$1.5)',
+    iceBazookaTitle: 'Ice Bazooka Chill Tip',
+    iceBazookaYes: 'Yes, Add Ice Bazooka Tip (+$2.5)',
+    iceBazookaNo: 'Standard (No Ice Tip)',
+    smokeDensityTitle: 'Desired Smoke Density',
+    smokeLight: 'Light & Smooth',
+    smokeMedium: 'Balanced & Medium',
+    smokeDense: 'Rich & Dense',
+    shishaNotesTitle: 'Notes for Shisha Master',
+    shishaNotesPlaceholder: 'e.g. gentle coals, quick charcoal rotation...',
+
+    // Drink Customization Modal
+    customizationTitle: 'Customize Item',
+    sizeTitle: 'Cup Size',
+    sizeSmall: 'Small',
+    sizeMedium: 'Medium (+$0.5)',
+    sizeLarge: 'Large (+$1.0)',
+    milkTitle: 'Milk Choice',
+    milkWhole: 'Organic Whole Milk',
+    milkSkim: 'Skim Milk',
+    milkAlmond: 'Roasted Almond Milk (+$0.5)',
+    milkOat: 'Creamy Oat Milk (+$0.5)',
+    sweetnessTitle: 'Sweetness / Sugar Level',
+    sweetNone: 'No Sugar (0%)',
+    sweetLess: 'Less Sugar (50%)',
+    sweetNormal: 'Normal (100%)',
+    sweetExtra: 'Extra Sweet (120%)',
+    tempTitle: 'Temperature & Ice',
+    tempNormal: 'Regular Ice',
+    tempExtraIce: 'Extra Ice',
+    tempNoIce: 'No Ice',
+    notesTitle: 'Special Barista / Kitchen Notes',
+    notesPlaceholder: 'e.g. extra silky microfoam, serve extra hot...',
+    addToCartCta: 'Add to Table Order',
+
+    // Cart Drawer & Checkout
+    cartTitle: 'Table Order Summary',
+    emptyCartTitle: 'No items selected yet',
+    emptyCartMsg: 'Browse our luxury shisha, specialty coffee, and sweets to place your order.',
+    exploreMenu: 'Explore Menu Now',
+    orderTypeTitle: 'Dining Option',
+    promoCodeTitle: 'VIP Promo Code',
+    promoCodePlaceholder: 'Enter code (try LAVOIS10)',
+    applyPromo: 'Apply',
+    promoApplied: 'VIP discount applied: 10% OFF',
+    subtotal: 'Subtotal',
+    tax: 'VAT (15%)',
+    discount: 'Discount',
+    total: 'Total',
+    paymentMethodTitle: 'Lounge Payment Method',
+    payWaiter: 'Pay at Table (Cash / Card via POS terminal)',
+    payApple: 'Apple Pay ()',
+    payMada: 'Mada / Credit Card',
+    confirmOrderCta: 'Send Order to Lounge Staff',
+
+    // Order Success Modal & Live Tracker
+    orderConfirmedTitle: 'Order Confirmed!',
+    orderConfirmedSubtitle: "Our team has started crafting your order and will serve it directly to your table.",
+    statusReceived: 'Order Received',
+    statusPreparing: 'Preparing with Care',
+    statusReady: 'Ready & Serving to Table',
+    saveReceipt: 'Save Digital Receipt',
+    startNewOrder: 'Add More Items',
+    close: 'Close',
+
+    // Mobile Bottom Navigation
+    navHome: 'Home',
+    navOrders: 'My Orders',
+    navSaved: 'Favorites',
+    navProfile: 'VIP Profile',
+    stickyCartItems: 'items',
+    stickyCartCheckout: 'Review & Order',
+
+    // Saved & Profile Tabs
+    savedTitle: 'Your Favorite Lounge Items',
+    savedEmpty: 'You haven’t saved any shisha or drinks yet.',
+    profileTitle: "L'Avois VIP Membership",
+    loyaltyPoints: 'Loyalty Points Earned',
+    pointsCount: '850 Points',
+    rewardsBadge: "L'Avois Gold VIP Tier",
+    freeCoffeeReward: '150 points away from complimentary royal shisha or specialty coffee!',
+  },
+};
