@@ -18,53 +18,6 @@ const CDN = "https://d3ectyws4rj41r.cloudfront.net/prod_anfascafe";
 
 export const MENU: MenuCategory[] = [
   {
-    id: "breakfast",
-    label: "الفطور",
-    labelEn: "Breakfast",
-    items: [
-      {
-        name: "فطور فالير عربي",
-        nameEn: "Arabic Valier Breakfast",
-        desc: "مجموعة متنوعة من الفطور مثل: البيض والسلطات الموسمية",
-        descEn: "A variety of breakfast items including eggs and seasonal salads",
-        imageUrl: `${CDN}/132/8c3a70b2f9a887818085da52052fbc16-(1).jpg`,
-        price: 40,
-      },
-      {
-        name: "فطور إنتركونتنتال",
-        nameEn: "Intercontinental Breakfast",
-        desc: "مجموعة متنوعة من الكروسان المشكل والمربى والزبدة",
-        descEn: "Assorted croissants, jam, and butter",
-        imageUrl: `${CDN}/132/8c3a70b2f9a887818085da52052fbc16-(1).jpg`,
-        price: 40,
-      },
-      {
-        name: "أوملت مكس جبنة",
-        nameEn: "Cheese Omelette",
-        desc: "بيض مخفوق مع إضافة الجبن",
-        descEn: "Scrambled eggs with cheese",
-        imageUrl: `${CDN}/132/8c3a70b2f9a887818085da52052fbc16-(1).jpg`,
-        price: 25,
-      },
-      {
-        name: "أوملت سادة",
-        nameEn: "Plain Omelette",
-        desc: "بيض مخفوق بدون إضافات",
-        descEn: "Plain scrambled eggs",
-        imageUrl: `${CDN}/132/8c3a70b2f9a887818085da52052fbc16-(1).jpg`,
-        price: 22,
-      },
-      {
-        name: "سلة كروسان",
-        nameEn: "Croissant Basket",
-        desc: "مجموعة من قطع الكروسان",
-        descEn: "A selection of croissants",
-        imageUrl: `${CDN}/144/media-library4YVp3j`,
-        price: 22,
-      },
-    ],
-  },
-  {
     id: "desserts",
     label: "الحلويات",
     labelEn: "Desserts",
