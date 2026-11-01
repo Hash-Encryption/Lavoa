@@ -1,9 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Instagram, Phone, Sparkles, Languages, Coffee, MapPin } from "lucide-react";
+import { Instagram, Phone, Sparkles, Languages, Coffee, MapPin, ShoppingBag, Plus, Minus } from "lucide-react";
 import heroImg from "@/assets/hero-lounge.jpg";
 import { MENU } from "@/lib/menu-data";
+import { CartProvider, useCart } from "@/lib/cart";
+import { CartDrawer } from "@/components/CartDrawer";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -54,7 +56,15 @@ function SnapchatIcon({ className }: { className?: string }) {
   );
 }
 
-function Index() {
+export function Index() {
+  return (
+    <CartProvider>
+      <IndexContent />
+    </CartProvider>
+  );
+}
+
+function IndexContent() {
   const [lang, setLang] = useState<Lang>("ar");
   const [active, setActive] = useState(MENU[0].id);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -62,6 +72,8 @@ function Index() {
   const activeCat = MENU.find((c) => c.id === active) ?? MENU[0];
   const t = T[lang];
   const isAr = lang === "ar";
+
+  const { itemCount, totalPrice, isOpen, setIsOpen, addItem, decrement, getItemQty, getItemId } = useCart();
 
   useEffect(() => {
     const el = tabsRef.current?.querySelector<HTMLButtonElement>(`[data-tab="${active}"]`);
@@ -82,16 +94,47 @@ function Index() {
         isAr ? "font-arabic" : ""
       }`}
     >
-      {/* Language toggle */}
-      <button
-        onClick={toggleLang}
-        aria-label="Switch language"
-        className="fixed top-5 z-50 inline-flex items-center gap-2 rounded-full border border-gold/40 bg-background/70 px-4 py-2 text-sm font-bold text-gold backdrop-blur-xl shadow-gold transition-all hover:border-gold hover:shadow-glow-gold"
-        style={isAr ? { left: "1.25rem" } : { right: "1.25rem" }}
-      >
-        <Languages className="h-4 w-4" />
-        <span>{t.switchTo}</span>
-      </button>
+      {/* Top Floating Controls: Language Switcher & Cart */}
+      <div className="pointer-events-none fixed top-5 inset-x-0 z-50 flex justify-between px-5 sm:px-8">
+        {/* Language button */}
+        <button
+          onClick={toggleLang}
+          aria-label="Switch language"
+          className="pointer-events-auto inline-flex items-center gap-2 rounded-full border border-gold/40 bg-background/80 px-4 py-2 text-sm font-bold text-gold backdrop-blur-xl shadow-gold transition-all hover:border-gold hover:shadow-glow-gold hover:scale-105 active:scale-95"
+        >
+          <Languages className="h-4 w-4" />
+          <span>{t.switchTo}</span>
+        </button>
+
+        {/* Shopping Cart button */}
+        <button
+          onClick={() => setIsOpen(true)}
+          aria-label="Open order cart"
+          className="pointer-events-auto inline-flex items-center gap-2.5 rounded-full border border-gold/50 bg-background/85 px-4 py-2 text-sm font-bold text-gold backdrop-blur-xl shadow-gold transition-all hover:border-gold hover:shadow-glow-gold hover:scale-105 active:scale-95"
+        >
+          <div className="relative">
+            <ShoppingBag className="h-4 w-4 text-gold" />
+            {itemCount > 0 && (
+              <motion.span
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                key={itemCount}
+                className="absolute -top-2 -right-2 grid h-4 min-w-4 place-items-center rounded-full bg-gold px-1 text-[10px] font-black text-black shadow-sm"
+              >
+                {itemCount}
+              </motion.span>
+            )}
+          </div>
+          <span className="font-bold text-xs sm:text-sm">
+            {isAr ? "طلباتك" : "Orders"}
+          </span>
+          {totalPrice > 0 && (
+            <span className="font-display text-xs text-champagne tabular-nums border-s border-gold/30 ps-2">
+              {totalPrice.toFixed(0)} ر.س
+            </span>
+          )}
+        </button>
+      </div>
 
       {/* HERO */}
       <section className="relative h-screen w-full overflow-hidden">
@@ -118,20 +161,20 @@ function Index() {
           </motion.div>
 
           <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.4 }}
-            className="mt-6 text-6xl sm:text-8xl md:text-9xl font-black leading-none tracking-tight text-champagne drop-shadow-[0_4px_30px_rgba(212,175,55,0.35)]"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.2, delay: 0.4 }}
+            className="mt-6 text-6xl sm:text-7xl md:text-8xl font-black tracking-tight"
             style={{ color: "var(--champagne)" }}
           >
             {t.brand}
           </motion.h1>
 
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.55 }}
-            className="mt-3 font-display italic text-gold tracking-[0.4em] text-sm"
+            transition={{ duration: 1, delay: 0.6 }}
+            className="mt-2 font-display italic text-gold tracking-[0.4em] text-sm uppercase"
           >
             {t.subBrand}
           </motion.p>
@@ -243,6 +286,9 @@ function Index() {
               {activeCat.items.map((item, i) => {
                 const name = isAr ? item.name : item.nameEn;
                 const desc = isAr ? item.desc : item.descEn;
+                const itemId = getItemId(item.nameEn, item.name, activeCat.id);
+                const qty = getItemQty(itemId);
+
                 return (
                   <motion.article
                     key={name}
@@ -250,9 +296,12 @@ function Index() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: Math.min(i * 0.05, 0.6) }}
                     whileHover={{ y: -6 }}
-                    className="glass-card group relative overflow-hidden rounded-2xl p-4 transition-all duration-500 hover:border-gold/60 hover:shadow-glow-gold"
+                    className={`glass-card group relative overflow-hidden rounded-2xl p-4 transition-all duration-500 hover:border-gold/60 hover:shadow-glow-gold flex flex-col justify-between ${
+                      qty > 0 ? "border-gold/50 shadow-gold" : ""
+                    }`}
                   >
                     <div className="absolute inset-0 opacity-0 bg-gradient-to-br from-gold/10 via-transparent to-transparent transition-opacity duration-500 group-hover:opacity-100" />
+                    
                     <div className="relative flex items-stretch gap-4">
                       {/* Thumbnail */}
                       <div className="relative shrink-0 h-24 w-24 sm:h-28 sm:w-28 overflow-hidden rounded-xl ring-1 ring-gold/25">
@@ -296,12 +345,51 @@ function Index() {
                           </div>
                         </div>
                         {desc && (
-                          <p className="mt-2 text-xs sm:text-sm text-muted-foreground leading-relaxed line-clamp-3">
+                          <p className="mt-2 text-xs sm:text-sm text-muted-foreground leading-relaxed line-clamp-2">
                             {desc}
                           </p>
                         )}
-                        <div className="mt-auto pt-3 h-px w-full bg-gradient-to-l from-transparent via-gold/30 to-transparent" />
                       </div>
+                    </div>
+
+                    {/* Order Action Footer */}
+                    <div className="relative mt-4 pt-3 flex items-center justify-between border-t border-gold/20">
+                      <span className="text-[11px] font-medium text-muted-foreground/80">
+                        {isAr ? "إضافة إلى طلبك" : "Add to order"}
+                      </span>
+
+                      {qty === 0 ? (
+                        <button
+                          type="button"
+                          onClick={() => addItem(item, activeCat.id)}
+                          className="inline-flex items-center gap-1.5 rounded-full border border-gold/40 bg-gold/15 px-3 py-1 text-xs font-bold text-gold transition-all hover:bg-gold hover:text-black hover:shadow-gold hover:scale-105 active:scale-95"
+                        >
+                          <Plus className="h-3.5 w-3.5" />
+                          <span>{isAr ? "أضف" : "Add"}</span>
+                        </button>
+                      ) : (
+                        <div className="inline-flex items-center gap-2 rounded-full border border-gold/60 bg-onyx px-2 py-0.5 shadow-gold">
+                          <button
+                            type="button"
+                            onClick={() => decrement(itemId)}
+                            className="grid h-6 w-6 place-items-center rounded-full text-gold hover:bg-gold/20 transition-colors"
+                            aria-label="Decrease quantity"
+                          >
+                            <Minus className="h-3 w-3" />
+                          </button>
+                          <span className="w-5 text-center text-xs font-black tabular-nums text-champagne">
+                            {qty}
+                          </span>
+                          <button
+                            type="button"
+                            onClick={() => addItem(item, activeCat.id)}
+                            className="grid h-6 w-6 place-items-center rounded-full text-gold hover:bg-gold/20 transition-colors"
+                            aria-label="Increase quantity"
+                          >
+                            <Plus className="h-3 w-3" />
+                          </button>
+                        </div>
+                      )}
                     </div>
                   </motion.article>
                 );
@@ -310,6 +398,44 @@ function Index() {
           </AnimatePresence>
         </div>
       </section>
+
+      {/* Floating Bottom Cart Bar (Appears when items are in cart) */}
+      <AnimatePresence>
+        {itemCount > 0 && !isOpen && (
+          <motion.div
+            initial={{ y: 80, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 80, opacity: 0 }}
+            transition={{ type: "spring", damping: 25, stiffness: 300 }}
+            className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 w-[92%] max-w-md"
+          >
+            <button
+              onClick={() => setIsOpen(true)}
+              className="flex w-full items-center justify-between rounded-full bg-gold-gradient p-3.5 px-6 font-bold text-black shadow-glow-gold transition-all hover:scale-[1.02] active:scale-[0.98]"
+            >
+              <div className="flex items-center gap-3">
+                <div className="grid h-8 w-8 place-items-center rounded-full bg-black/20 text-black">
+                  <ShoppingBag className="h-4 w-4" />
+                </div>
+                <div className="text-start">
+                  <span className="block text-sm font-black leading-tight">
+                    {isAr ? `عرض السلة (${itemCount})` : `View Order (${itemCount})`}
+                  </span>
+                  <span className="block text-[11px] opacity-80">
+                    {isAr ? "اضغط لإتمام وإرسال الطلب" : "Tap to complete checkout"}
+                  </span>
+                </div>
+              </div>
+              <span className="font-display text-lg font-black tabular-nums">
+                {totalPrice.toFixed(2)} ر.س
+              </span>
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Cart Drawer */}
+      <CartDrawer lang={lang} />
 
       {/* FOOTER */}
       <footer className="relative border-t border-gold/20 bg-charcoal/40 backdrop-blur-md">
