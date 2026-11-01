@@ -30,7 +30,7 @@ export function CartDrawer({ lang }: Props) {
   const handleCheckout = () => {
     if (items.length === 0) return;
 
-    const brandTitle = isAr ? "👑 *طلب جديد من لافوا لاونج | LAVOA*" : "👑 *New Order from LAVOA LOUNGE*";
+    const brandTitle = isAr ? "👑 *طلب جديد من لاڤوا لاونج | LAVOA*" : "👑 *New Order from LAVOA LOUNGE*";
     const divider = "━━━━━━━━━━━━━━━━━━━━";
     
     const typeText = orderType === "dine-in" 

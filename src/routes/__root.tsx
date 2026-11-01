@@ -69,7 +69,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1, maximum-scale=1" },
-      { title: "ليالي الفخامة | Midnight Luxury Café" },
+      { title: "لاڤوا | LAVOA Luxury Lounge" },
       { name: "description", content: "تجربة ليلية فاخرة — قائمة مقهى الليل الراقي بمشروبات ومأكولات ومعسلات مميزة" },
       { property: "og:title", content: "ليالي الفخامة | Midnight Luxury Café" },
       { property: "og:description", content: "تجربة ليلية فاخرة في أرقى مقاهي الليل" },

@@ -16,7 +16,7 @@ type Lang = "ar" | "en";
 const T = {
   ar: {
     tagline: "Est. Midnight",
-    brand: "لافوا",
+    brand: "لاڤوا",
     subBrand: "LAVOA",
     hero: "تجربة ليلية استثنائية حيث تلتقي الأناقة بذائقة المذاق — قهوة راقية، معسلات فاخرة، وأجواء لا تُنسى",
     cta: "استكشف القائمة",
@@ -29,7 +29,7 @@ const T = {
   en: {
     tagline: "Est. Midnight",
     brand: "LAVOA",
-    subBrand: "لافوا",
+    subBrand: "لاڤوا",
     hero: "An extraordinary nightly experience where elegance meets exquisite taste — refined coffee, premium shisha, and an unforgettable ambience",
     cta: "Explore the Menu",
     menuKicker: "The Menu",
