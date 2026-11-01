@@ -254,7 +254,7 @@ export function CartDrawer({ lang }: Props) {
                           value={tableNumber}
                           onChange={(e) => setTableNumber(e.target.value)}
                           placeholder={isAr ? "مثال: طاولة 5 أو VIP 2" : "e.g. Table 5 or VIP"}
-                          className="w-full rounded-lg border border-gold/30 bg-onyx/80 px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground/50 focus:border-gold focus:outline-none"
+                          className="w-full rounded-lg border border-gold/30 bg-onyx/80 px-3 py-2.5 text-[16px] text-foreground placeholder:text-muted-foreground/50 focus:border-gold focus:outline-none"
                         />
                       </div>
                     )}
@@ -268,7 +268,7 @@ export function CartDrawer({ lang }: Props) {
                         onChange={(e) => setNotes(e.target.value)}
                         rows={2}
                         placeholder={isAr ? "مثال: سكر زيادة، خالي من الثلج، رأس أناناس..." : "Any preferences or notes..."}
-                        className="w-full rounded-lg border border-gold/30 bg-onyx/80 px-3 py-2 text-xs text-foreground placeholder:text-muted-foreground/50 focus:border-gold focus:outline-none resize-none"
+                        className="w-full rounded-lg border border-gold/30 bg-onyx/80 px-3 py-2.5 text-[16px] text-foreground placeholder:text-muted-foreground/50 focus:border-gold focus:outline-none resize-none"
                       />
                     </div>
                   </div>
