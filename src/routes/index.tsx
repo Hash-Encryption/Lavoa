@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Instagram, Phone, Sparkles, Languages, Coffee, MapPin, ShoppingBag, Plus, Minus } from "lucide-react";
+import { Instagram, Sparkles, Languages, Coffee, MapPin, ShoppingBag, Plus, Minus } from "lucide-react";
 import heroImg from "@/assets/hero-lounge.jpg";
 import { MENU } from "@/lib/menu-data";
 import { CartProvider, useCart } from "@/lib/cart";
@@ -467,14 +467,7 @@ function IndexContent() {
               <a href="https://maps.app.goo.gl/K53Upe4tXqj4FEmB8" target="_blank" rel="noopener noreferrer" aria-label="Google Maps" className="grid h-11 w-11 place-items-center rounded-full border border-gold/30 text-gold transition-all hover:border-gold hover:shadow-glow-gold hover:scale-110">
                 <MapPin className="h-5 w-5" />
               </a>
-              <a href="tel:+000000000" aria-label="Phone" className="grid h-11 w-11 place-items-center rounded-full border border-gold/30 text-gold transition-all hover:border-gold hover:shadow-glow-gold hover:scale-110">
-                <Phone className="h-5 w-5" />
-              </a>
             </div>
-
-            <a href="tel:+966500000000" className="font-display text-gold text-lg tracking-wide">
-              +966 50 000 0000
-            </a>
 
             <div className="mx-auto h-px w-24 bg-gradient-to-l from-transparent via-gold/40 to-transparent" />
             <p className="text-xs text-muted-foreground">
