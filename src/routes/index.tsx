@@ -461,7 +461,7 @@ function IndexContent() {
               <a href="https://www.tiktok.com/@lavoa.lounge?_r=1&_t=ZS-98FbVBGHe4a" target="_blank" rel="noopener noreferrer" aria-label="TikTok" className="grid h-11 w-11 place-items-center rounded-full border border-gold/30 text-gold transition-all hover:border-gold hover:shadow-glow-gold hover:scale-110">
                 <TikTokIcon className="h-5 w-5" />
               </a>
-              <a href="https://snapchat.com/t/6ipYMBLJ" target="_blank" rel="noopener noreferrer" aria-label="Snapchat" className="grid h-11 w-11 place-items-center rounded-full border border-gold/30 text-gold transition-all hover:border-gold hover:shadow-glow-gold hover:scale-110">
+              <a href="https://snapchat.com/t/HlrUtOz8" target="_blank" rel="noopener noreferrer" aria-label="Snapchat" className="grid h-11 w-11 place-items-center rounded-full border border-gold/30 text-gold transition-all hover:border-gold hover:shadow-glow-gold hover:scale-110">
                 <SnapchatIcon className="h-5 w-5" />
               </a>
               <a href="https://maps.app.goo.gl/K53Upe4tXqj4FEmB8" target="_blank" rel="noopener noreferrer" aria-label="Google Maps" className="grid h-11 w-11 place-items-center rounded-full border border-gold/30 text-gold transition-all hover:border-gold hover:shadow-glow-gold hover:scale-110">
