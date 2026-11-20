@@ -36,7 +36,7 @@ const CartContext = createContext<CartContextType | null>(null);
 
 const STORAGE_KEY = "lavoa_cart_v1";
 
-export const WHATSAPP_NUMBER = "966551117889";
+export const WHATSAPP_NUMBER = "966548111980";
 
 export function getItemId(nameEn: string, name: string, categoryId = ""): string {
   const base = nameEn || name;
